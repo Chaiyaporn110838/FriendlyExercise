@@ -1,5 +1,6 @@
 package pjstudio.rtc.chaiyaporn.friendlyexcercise;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,9 +19,18 @@ public class MainActivity extends AppCompatActivity {
 
         //Test Value Add
        // testAddValue();
+        //Delete All SQLite
+        deleteAllSQLite();
 
 
     }//Main Method
+
+    private void deleteAllSQLite() {
+        SQLiteDatabase objSqLiteDatabase = openOrCreateDatabase(MyOpenHelper.DATABASE_NEME, MODE_PRIVATE, null);
+        objSqLiteDatabase.delete(ManageTABLE.TABLE_USER, null, null);
+        objSqLiteDatabase.delete(ManageTABLE.TABLE_SUBJECT, null, null);
+
+    }
 
     private void testAddValue() {
         String strTest = "Test";
