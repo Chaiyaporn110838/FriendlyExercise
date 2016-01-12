@@ -115,5 +115,6 @@
         android:layout_height="wrap_content"
         android:text="Save Data"
         android:id="@+id/button3"
+        android:onClick="clickSaveData"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyOpenHelper extends SQLiteOpenHelper{
     //Explicit
+    public static final String tag = "fried";
     public static final String DATABASE_NEME = "Friend.db";
     private static final int DATABASE_VERSION = 1;
 
