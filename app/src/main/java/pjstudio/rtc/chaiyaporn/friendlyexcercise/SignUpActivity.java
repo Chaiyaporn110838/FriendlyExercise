@@ -44,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
             objMyAlertDialog.errorDialog(SignUpActivity.this, "Have Space", "Please Fill All Blank");
 
         } else {
+            //No space
+
         } //if
 
 
