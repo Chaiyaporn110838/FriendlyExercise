@@ -1,5 +1,6 @@
 package pjstudio.rtc.chaiyaporn.friendlyexcercise;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -45,5 +46,39 @@ public class ManageTABLE {
 
 
     }//Constructor
+
+    public long addNewValueToUser(String strUser,
+                                  String strPassword,
+                                  String strStatus,
+                                  String strName,
+                                  String strSurname,
+                                  String strSub1,
+                                  String strDateSub1,
+                                  String strSub2,
+                                  String strDateSub2,
+                                  String strSub3,
+                                  String strDateSub3,
+                                  String strSub4,
+                                  String strDateSub4) {
+
+        ContentValues objContentValues = new ContentValues();
+        objContentValues.put(COLUMN_USER, strUser);
+        objContentValues.put(COLUMN_PASSWORD, strPassword);
+        objContentValues.put(COLUMN_STATUS, strStatus);
+        objContentValues.put(COLUMN_NAME, strName);
+        objContentValues.put(COLUMN_SURNAME, strSurname);
+        objContentValues.put(COLUMN_SUBJECT1, strSub1);
+        objContentValues.put(COLUMN_DATESUB1, strDateSub1);
+        objContentValues.put(COLUMN_SUBJECT2, strSub2);
+        objContentValues.put(COLUMN_DATESUB2, strDateSub2);
+        objContentValues.put(COLUMN_SUBJECT3, strSub3);
+        objContentValues.put(COLUMN_DATESUB3, strDateSub3);
+        objContentValues.put(COLUMN_SUBJECT4, strSub4);
+        objContentValues.put(COLUMN_DATESUB2, strDateSub4);
+
+
+        return writeSqLiteDatabase.insert(TABLE_USER, null, objContentValues);
+    }
+
 
 }//Main class
