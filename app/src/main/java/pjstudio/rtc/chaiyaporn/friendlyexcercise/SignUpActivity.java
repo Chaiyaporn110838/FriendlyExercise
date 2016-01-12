@@ -1,5 +1,6 @@
 package pjstudio.rtc.chaiyaporn.friendlyexcercise;
 
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,9 +46,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         } else {
             //No space
+            updateNewStudent();
 
         } //if
 
 
     }//ClickSaveData
+
+    private void updateNewStudent() {
+        //setup New policy
+        StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(myPolicy);
+    }//updateNewStudent
 }//main class
