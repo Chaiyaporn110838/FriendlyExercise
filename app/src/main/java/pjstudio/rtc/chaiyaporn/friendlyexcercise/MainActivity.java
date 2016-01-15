@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             objMyAlertDialog.errorDialog(MainActivity.this,
                     "Have Space", "Please fill all Blank");
         } else {
+            //no space
 
         } //if
 
