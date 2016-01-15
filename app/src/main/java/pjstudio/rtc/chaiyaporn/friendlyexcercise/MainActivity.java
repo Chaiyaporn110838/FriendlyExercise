@@ -33,9 +33,17 @@ public class MainActivity extends AppCompatActivity {
        // testAddValue();
         //Delete All SQLite
         deleteAllSQLite();
+        //Synchronize JSON to AQLite
+        synJSONtoSQLite();
 
 
     }//Main Method
+
+    private void synJSONtoSQLite() {
+
+
+
+    }//synJSONtoSQLite
 
     public void clickSignIn(View view) {
         userString = userEditText.getText().toString().trim();
