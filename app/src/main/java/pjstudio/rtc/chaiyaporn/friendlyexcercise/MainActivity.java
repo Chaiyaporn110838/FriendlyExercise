@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText userEditText, passwordEditText;
     private RadioGroup positionRadioGroup;
     private RadioButton studentRadioButton, teacherRadioButton;
-    private String userString, passwordString, positionString;
+    private String userString, passwordString, positionString, idString;
 
 
 
@@ -49,9 +49,33 @@ public class MainActivity extends AppCompatActivity {
         deleteAllSQLite();
         //Synchronize JSON to AQLite
         synJSONtoSQLite();
+        //RadioGroup Controller
+        radioGroupController();
 
 
     }//Main Method
+
+    private void radioGroupController() {
+        positionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                switch (i) {
+                    case R.id.radioButton:
+                        positionString = "0";
+                        break;
+                    case R.id.radioButton2:
+                        passwordString = "1";
+
+                        break;
+
+                } //switch
+
+            } //Event
+        });
+
+
+    }
 
     private void synJSONtoSQLite() {
         //setup policy
@@ -172,11 +196,47 @@ public class MainActivity extends AppCompatActivity {
                     "Have Space", "Please fill all Blank");
         } else {
             //no space
+            checkUser();
 
         } //if
 
 
     }//clickSignIn
+
+    private void checkUser() {
+        try {
+            String[] resultStrings = objManageTABLE.searchUser(userString);
+            idString = resultStrings[0];
+            //Check Password
+            if (passwordString.equals(resultStrings[2])) {
+                //Password True & check position
+                if (positionString.equals(resultStrings[3])) {
+                    //position true
+                    Intent objIntent = new Intent(MainActivity.this, ServiceActivity.class);
+                    objIntent.putExtra("id", idString);
+                    startActivity(objIntent);
+                    finish();
+                } else {
+                    //position false
+                    MyAlertDialog objMyAlertDialog = new MyAlertDialog();
+                    objMyAlertDialog.errorDialog(MainActivity.this, "Position False", "Please Choose Again Position");
+
+                }//if2
+
+            } else {
+                //Password fail
+                MyAlertDialog objMyAlertDialog = new MyAlertDialog();
+                objMyAlertDialog.errorDialog(MainActivity.this, "Password False", "Please try again Password False");
+
+            } //if1
+        } catch (Exception e) {
+            MyAlertDialog objMyAlertDialog = new MyAlertDialog();
+            objMyAlertDialog.errorDialog(MainActivity.this, "No this User", "No" + userString + "on my Database");
+
+        }
+
+
+    }//checkUser
 
     private void bindWidget() {
         userEditText = (EditText) findViewById(R.id.editText);
