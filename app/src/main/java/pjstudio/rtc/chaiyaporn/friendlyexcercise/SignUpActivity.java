@@ -81,6 +81,9 @@ public class SignUpActivity extends AppCompatActivity {
             HttpPost objHttpPost = new HttpPost(strURL);
             objHttpPost.setEntity(new UrlEncodedFormEntity(objNameValuePairs, "UTF-8"));
             objHttpClient.execute(objHttpPost);
+            Toast.makeText(SignUpActivity.this, "Update Finish", Toast.LENGTH_SHORT).show();
+            finish();
+
         } catch (Exception e) {
             Toast.makeText(SignUpActivity.this, "Can't Update New Value to Server", Toast.LENGTH_SHORT).show();
         }
