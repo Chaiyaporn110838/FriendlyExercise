@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                     //position true
                     Intent objIntent = new Intent(MainActivity.this, ServiceActivity.class);
                     objIntent.putExtra("id", idString);
+                    objIntent.putExtra("Position", resultStrings[3]);
                     startActivity(objIntent);
                     finish();
                 } else {
