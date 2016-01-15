@@ -5,6 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity {
     //Explicit
@@ -57,5 +67,22 @@ public class SignUpActivity extends AppCompatActivity {
         //setup New policy
         StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(myPolicy);
+        //Update mySQL
+        try {
+            ArrayList<NameValuePair> objNameValuePairs = new ArrayList<NameValuePair>();
+            objNameValuePairs.add(new BasicNameValuePair("isAdd","true"));
+            objNameValuePairs.add(new BasicNameValuePair("User",userString));
+            objNameValuePairs.add(new BasicNameValuePair("Password", passwordString));
+            objNameValuePairs.add(new BasicNameValuePair("Name", nameString));
+            objNameValuePairs.add(new BasicNameValuePair("Surname", surnameString));
+
+            String strURL = "http://swiftcodingthai.com/pop/php_add_data_pop.php";
+            HttpClient objHttpClient = new DefaultHttpClient();
+            HttpPost objHttpPost = new HttpPost(strURL);
+            objHttpPost.setEntity(new UrlEncodedFormEntity(objNameValuePairs, "UTF-8"));
+            objHttpClient.execute(objHttpPost);
+        } catch (Exception e) {
+            Toast.makeText(SignUpActivity.this, "Can't Update New Value to Server", Toast.LENGTH_SHORT).show();
+        }
     }//updateNewStudent
 }//main class
